@@ -1,0 +1,25 @@
+# Compiled files
+/target/
+
+# Rust artifacts
+Cargo.lock
+Cargo.toml.orig
+*.rlib
+*.rmeta
+
+# IDE and editor files
+/.vscode/
+/.idea/
+
+# Build output
+/build/
+
+# Generated documentation
+/target/doc/
+
+# Test results
+/target/debug/deps/
+/target/debug/build/
+/target/release/deps/
+/target/release/build/
+

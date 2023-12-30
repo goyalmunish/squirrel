@@ -1,0 +1,71 @@
+name: "sample workflow"
+steps:
+  - !PageOpen "https://au.iherb.com/recommended-for-you?type=1&cid=1855"
+  - !PageWait 3000
+  - !PageScroll
+    - "page"
+    - 2.0
+  - !PageWait 5000
+  - !PageLoop
+    - !PageLocateElements
+      - "html a.pagination-next"
+      - "index"
+      - 0
+    - !ElementsLoopThrough
+      - !ElementClick
+      - !ElementPop
+    - !PageScroll
+      - "page"
+      - 1.5
+    - !PageWait 2000
+  - !PageWait 5000
+  - !PageOpen "https://www.wikipedia.org/"
+  - !PageWait 2000
+  - !PageLocateElements
+    - "html div.lang1"
+    - "index"
+    - 0
+  - !PageWait 1000
+  - !ElementsLoopThrough
+    - !ElementClick
+    - !ElementPop
+  - !PageWait 2000
+  - !PageBack
+  - !PageLocateElements
+    - "html input#searchInput"
+    - "index"
+    - 0
+  - !ElementsLoopThrough
+    - !ElementSendKeys "first search"
+    - !ElementPop
+  - !PageLocateElements
+    - "html button.pure-button"
+    - "index"
+    - 0
+  - !ElementsLoopThrough
+    - !ElementClick
+    - !ElementPop
+  - !PageWait 2000
+  - !PageOpen "https://www.wikipedia.org/"
+  - !PageLocateElements
+    - "body div"
+    - "all"
+    - 0
+  - !PageLocateElements
+    - "body h1 strong"
+    - "index"
+    - 0
+  - !ElementsLoopThrough
+    - !ElementSaveHtmlValue true
+    - !ElementTakeScreenshot "separate"
+    - !ElementPop
+    - !PageWait 100
+  - !PrintCurrentValues
+  - !PageScroll
+    - "full"
+    - 1.0
+  - !PageWait 5000
+  - !PageTakeScreenshot "page_stackoverflow_home"
+  - !PageScroll
+    - "all"
+    - -1.0
