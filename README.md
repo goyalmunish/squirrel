@@ -21,19 +21,41 @@ npx @puppeteer/browsers install chromedriver@stable
 cd ~
 mv chrome chromeDIR
 mv chromedriver chromedriverDIR
-ln -s chromeDIR/<>/chrome-mac-arm64/Google\ Chrome\ for\ Testing.app Google\ Chrome\ for\ Testing.app
-ln -s chromedriverDIR/<>/chromedriver-mac-arm64/chromedriver chromedriver
+ln -s chromeDIR/.../Google\ Chrome\ for\ Testing.app Google\ Chrome\ for\ Testing.app
+# note: for macOS, drag a copy of Google Chrome for Testing app to "Applications" as well
+ln -s chromedriverDIR/.../chromedriver chromedriver
 
 # Run webdriver
 cd ~
-./chromedriver --verbose --port=9515 --allowed-origins=0.0.0.0 --allowed-ips=0.0.0.0
+./chromedriver --verbose --port=9515 --allowed-origins='*' --allowed-ips='0.0.0.0'
 ```
+
+Once the webdriver is running, you may test by connecting to http://0.0.0.0:9515/.
 
 ### Step 2: Run Squirrel
 
+Option 1: Using Squirrel executable from published Docker image (preferred)
+
+For docker container to host machine connectivity issues, refer [I want to connect from a container to a service on the host](https://docs.docker.com/desktop/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host).
+
 ```shell
-# Run with sample workflow (without headless browser)
-cargo run --release ./src/sample_workflow.yaml false
+# Run with sample workflow (with default option of webdriver_url=http://host.docker.internal:9515 and headless_browser=true)
+docker run --rm --name squirrel goyalmunish/squirrel
+
+# Run with your own workflow without headless browser
+docker run --rm --name squirrel goyalmunish/squirrel ./src/sample_workflow.yaml http://host.docker.internal:9515 false
+```
+
+Option 2: Using the Squirrel executable build locally
+
+```shell
+# Clone the repo
+git clone git@github.com:goyalmunish/squirrel.git
+
+cd squirrel
+
+# Run with sample workflow (with default option of webdriver_url=http://localhost:9515 and headless_browser=true)
+cargo run --release ./src/sample_workflow.yaml
 ```
 
 ## Development Guid

@@ -28,7 +28,7 @@ mod tests {
         let config = config::Config {
             workflow_file_path: String::from("config.yaml"),
             headless_browser: true,
-            webdriver_port: config::WEBDRIVER_PORT_DEFAULT,
+            webdriver_url: config::WEBDRIVER_URL_DEFAULT.to_string(),
             temp_dir: String::from(config::TEMP_DIR_DEFAULT),
         };
 
@@ -47,7 +47,7 @@ mod tests {
         let config = config::Config {
             workflow_file_path: String::from("config.yaml"),
             headless_browser: false,
-            webdriver_port: config::WEBDRIVER_PORT_DEFAULT,
+            webdriver_url: config::WEBDRIVER_URL_DEFAULT.to_string(),
             temp_dir: String::from(config::TEMP_DIR_DEFAULT),
         };
 

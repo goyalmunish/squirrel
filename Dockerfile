@@ -4,12 +4,16 @@ FROM rust:${RUST_VERSION}-bookworm as builder
 
 WORKDIR /app
 
-# Copy the entire project and build it
-COPY . .
-RUN cargo build --release
+# Copy files required to build executable
+COPY ./src ./src
+COPY ./Cargo.lock ./
+COPY ./Cargo.toml ./
+COPY rust-toolchain ./
+
+# Build the executable
+RUN cargo build -vv --release
 
 # Stage 2: Create the final lightweight image
-# TODO: User docker image with chrome testing browser
 FROM debian:bookworm-slim
 
 WORKDIR /app
@@ -17,10 +21,10 @@ WORKDIR /app
 # Copy the built executable from the previous stage
 COPY --from=builder /app/target/release/squirrel /app
 # Copy the sample workflow (for example purpose)
-COPY src/sample_workflow.yaml /app
+COPY ./src/sample_workflow.yaml /app/src/
 
 # Set the entry point to the executable
 ENTRYPOINT ["./squirrel"]
 
-# Set default parameters to entrypoint
-CMD ["sample_workflow.yaml", "false"]
+# Set default arguments to entrypoint
+CMD ["./src/sample_workflow.yaml", "http://host.docker.internal:9515", "true"]

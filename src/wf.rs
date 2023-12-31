@@ -21,7 +21,7 @@ pub async fn invoke_workflow(config: &config::Config) -> Result<(), fantoccini::
     println!("Using capabilities: {:#?}", capabilities);
     let conn_webdriver = match fantoccini::ClientBuilder::native()
         .capabilities(capabilities)
-        .connect(format!("http://0.0.0.0:{}", config.webdriver_port).as_str())
+        .connect(format!("{}", config.webdriver_url).as_str())
         .await
     {
         Ok(value) => value,
@@ -43,7 +43,7 @@ pub async fn invoke_workflow(config: &config::Config) -> Result<(), fantoccini::
     // Execute all steps
     for (index, step) in wf.steps.iter().enumerate() {
         println!(
-            "Step {index}: {} (timestamp={})",
+            "Step {index}: {} [timestamp={}]",
             step.to_string(),
             utils::timestamp()
         );
@@ -142,7 +142,7 @@ mod tests {
         let config = config::Config {
             workflow_file_path: workflow_path.to_string_lossy().to_string(),
             headless_browser: true,
-            webdriver_port: config::WEBDRIVER_PORT_DEFAULT,
+            webdriver_url: config::WEBDRIVER_URL_DEFAULT.to_string(),
             temp_dir: String::from(config::TEMP_DIR_DEFAULT),
         };
 
@@ -162,7 +162,7 @@ mod tests {
         let config = config::Config {
             workflow_file_path: String::from("/nonexistent/file.yaml"),
             headless_browser: true,
-            webdriver_port: config::WEBDRIVER_PORT_DEFAULT,
+            webdriver_url: config::WEBDRIVER_URL_DEFAULT.to_string(),
             temp_dir: String::from(config::TEMP_DIR_DEFAULT),
         };
 

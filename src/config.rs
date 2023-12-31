@@ -3,13 +3,13 @@
 #[derive(Debug)]
 pub struct Config {
     pub workflow_file_path: String,
+    pub webdriver_url: String,
     pub headless_browser: bool,
-    pub webdriver_port: usize,
     pub temp_dir: String,
 }
 
+pub const WEBDRIVER_URL_DEFAULT: &str = "http://localhost:9515";
 pub const HEADLESS_BROWSER_DEFAULT: bool = true;
-pub const WEBDRIVER_PORT_DEFAULT: usize = 9515;
 pub const TEMP_DIR_DEFAULT: &str = "temp/";
 /// TAB_SIZE defines the printing indentation.
 pub const TAB_SIZE: usize = 4;
@@ -19,7 +19,11 @@ pub fn parse_args(args: &Vec<String>) -> Config {
         None => panic!("Provide configuration file (.yaml) path as the first argument!"),
         Some(v) => v.clone(),
     };
-    let headless_browser = match args.get(2) {
+    let webdriver_url = match args.get(2) {
+        None => WEBDRIVER_URL_DEFAULT.to_string(),
+        Some(v) => v.clone(),
+    };
+    let headless_browser = match args.get(3) {
         None => HEADLESS_BROWSER_DEFAULT,
         Some(elem) => match elem.trim().parse() {
             Err(_) => HEADLESS_BROWSER_DEFAULT,
@@ -28,8 +32,8 @@ pub fn parse_args(args: &Vec<String>) -> Config {
     };
     return Config {
         workflow_file_path,
+        webdriver_url,
         headless_browser,
-        webdriver_port: WEBDRIVER_PORT_DEFAULT,
         temp_dir: TEMP_DIR_DEFAULT.to_string(),
     };
 }
@@ -37,6 +41,13 @@ pub fn parse_args(args: &Vec<String>) -> Config {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    #[should_panic(expected = "Provide configuration file (.yaml) path as the first argument!")]
+    fn parse_args_with_missing_workflow_path() {
+        let args = vec![String::from("program_name")];
+        parse_args(&args);
+    }
 
     #[test]
     fn parse_args_with_workflow_path() {
@@ -48,7 +59,7 @@ mod tests {
 
         assert_eq!(config.workflow_file_path, "./sample_workflow.yaml");
         assert_eq!(config.headless_browser, HEADLESS_BROWSER_DEFAULT);
-        assert_eq!(config.webdriver_port, WEBDRIVER_PORT_DEFAULT);
+        assert_eq!(config.webdriver_url, WEBDRIVER_URL_DEFAULT);
         assert_eq!(config.temp_dir, TEMP_DIR_DEFAULT.to_string());
     }
 
@@ -57,20 +68,14 @@ mod tests {
         let args = vec![
             String::from("program_name"),
             String::from("./sample_workflow.yaml"),
+            String::from("http://localhost:9515"),
             String::from("false"),
         ];
         let config = parse_args(&args);
 
         assert_eq!(config.workflow_file_path, "./sample_workflow.yaml");
         assert_eq!(config.headless_browser, false);
-        assert_eq!(config.webdriver_port, WEBDRIVER_PORT_DEFAULT);
+        assert_eq!(config.webdriver_url, WEBDRIVER_URL_DEFAULT);
         assert_eq!(config.temp_dir, TEMP_DIR_DEFAULT.to_string());
-    }
-
-    #[test]
-    #[should_panic(expected = "Provide configuration file (.yaml) path as the first argument!")]
-    fn parse_args_with_missing_workflow_path() {
-        let args = vec![String::from("program_name")];
-        parse_args(&args);
     }
 }

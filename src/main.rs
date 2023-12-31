@@ -10,9 +10,10 @@ mod wf;
 /// the library handles all the underlying complexities for you.
 ///
 /// Example:
-/// `cargo run ./src/sample_workflow.yaml`
-/// `./target/debug/squirrel ./src/sample_workflow.yaml false`
-/// RustRover: `run --package squirrel --bin squirrel -- ./src/sample_workflow.yaml false`
+///   `cargo run ./src/sample_workflow.yaml` # with default values for other arguments
+///   `cargo run ./src/sample_workflow.yaml http://localhost:9515 true` # with default values (but provided explicitly) for webdriver_url and headless_browser
+///   `./target/debug/squirrel ./src/sample_workflow.yaml http://localhost:9515 false`
+///   RustRover: `run --package squirrel --bin squirrel -- ./src/sample_workflow.yaml http://localhost:9515 false`
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     let cnf: config::Config = config::parse_args(&args);
