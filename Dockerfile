@@ -1,6 +1,11 @@
+# Referenes:
+# https://hub.docker.com/_/debian
+# https://www.debian.org/distrib/packages
+# https://hub.docker.com/_/rust
+
 # Use the official Rust image for building
 ARG RUST_VERSION=1.75
-FROM rust:${RUST_VERSION}-bookworm as builder
+FROM rust:${RUST_VERSION}-bullseye as builder
 
 WORKDIR /app
 
@@ -11,10 +16,10 @@ COPY ./Cargo.toml ./
 COPY rust-toolchain ./
 
 # Build the executable
-RUN cargo build -vv --release
+RUN cargo build -v --release
 
 # Stage 2: Create the final lightweight image
-FROM debian:bookworm-slim
+FROM debian:bullseye
 
 WORKDIR /app
 

@@ -36,6 +36,8 @@ Once the webdriver is running, you may test by connecting to http://0.0.0.0:9515
 
 Option 1: Using Squirrel executable from published Docker image (preferred)
 
+Refer [Install Docker Engine](https://docs.docker.com/engine/install/) for Docker installation.
+
 For docker container to host machine connectivity issues, refer [I want to connect from a container to a service on the host](https://docs.docker.com/desktop/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host).
 
 ```shell
@@ -58,7 +60,7 @@ cd squirrel
 cargo run --release ./src/sample_workflow.yaml
 ```
 
-## Development Guid
+## Development Guide
 
 ## Build and Push the Docker Image
 
