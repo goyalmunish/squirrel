@@ -34,7 +34,7 @@ Once the webdriver is running, you may test by connecting to http://0.0.0.0:9515
 
 ### Step 2: Run Squirrel
 
-Option 1: Using Squirrel executable from published Docker image (preferred)
+**Option 1:** Using Squirrel executable from published Docker image (preferred)
 
 Refer [Install Docker Engine](https://docs.docker.com/engine/install/) for Docker installation.
 
@@ -48,7 +48,7 @@ docker run --rm --name squirrel goyalmunish/squirrel
 docker run --rm --name squirrel goyalmunish/squirrel ./src/sample_workflow.yaml http://host.docker.internal:9515 false
 ```
 
-Option 2: Using the Squirrel executable build locally
+**Option 2:** Using the Squirrel executable build locally
 
 ```shell
 # Clone the repo
@@ -58,6 +58,21 @@ cd squirrel
 
 # Run with sample workflow (with default option of webdriver_url=http://localhost:9515 and headless_browser=true)
 cargo run --release ./src/sample_workflow.yaml
+```
+
+**Option 3:** Using both, Squirrel executable and Web Driver, from published Docker images (experimental)
+
+Refer:
+
+- [`SeleniumHQ/docker-selenium`](https://github.com/SeleniumHQ/docker-selenium) (Selenium Docker Images)
+- [`seleniumhq-community/docker-seleniarm`](https://github.com/seleniumhq-community/docker-seleniarm) (Selenium Docker Images for Arm64)
+
+```shell
+# Run Selenium Chromium on MacOS (Arm64)
+docker run --rm -it -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --name chrome seleniarm/standalone-chromium:latest
+
+# Run Squirrel (in headless mode)
+docker run --rm --name squirrel goyalmunish/squirrel ./src/sample_workflow.yaml http://host.docker.internal:4444 true
 ```
 
 ## Development Guide
