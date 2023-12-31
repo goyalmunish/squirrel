@@ -5,6 +5,9 @@ pub fn client_capabilities(config: &config::Config) -> serde_json::Map<String, s
     let mut browser_args: Vec<String> = Vec::new();
     if config.headless_browser {
         browser_args.push("--headless".to_string());
+        // browser_args.push("--no-sandbox".to_string());
+        // browser_args.push("--disable-dev-shm-usage".to_string());
+        // browser_args.push("--disable-gpu".to_string());
     }
     let options = serde_json::json!({ "args": browser_args });
 

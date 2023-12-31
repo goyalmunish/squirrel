@@ -10,7 +10,8 @@ mod wf;
 /// the library handles all the underlying complexities for you.
 ///
 /// Example:
-/// `cargo run -- ./src/sample_workflow.yaml`
+/// `cargo run ./src/sample_workflow.yaml`
+/// `./target/debug/squirrel ./src/sample_workflow.yaml false`
 /// RustRover: `run --package squirrel --bin squirrel -- ./src/sample_workflow.yaml false`
 fn main() {
     let args: Vec<String> = std::env::args().collect();

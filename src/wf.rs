@@ -21,7 +21,7 @@ pub async fn invoke_workflow(config: &config::Config) -> Result<(), fantoccini::
     println!("Using capabilities: {:#?}", capabilities);
     let conn_webdriver = match fantoccini::ClientBuilder::native()
         .capabilities(capabilities)
-        .connect(format!("http://localhost:{}", config.webdriver_port).as_str())
+        .connect(format!("http://0.0.0.0:{}", config.webdriver_port).as_str())
         .await
     {
         Ok(value) => value,
