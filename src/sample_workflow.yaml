@@ -1,10 +1,44 @@
-name: "sample workflow"
+name: "Sample Workflow"
 steps:
+  # Example 1: Open a URL (Example: Wikipedia).
+  - !PageOpen "https://www.wikipedia.org/"
+
+  # Example 2: Locate and loop through specific elements, save HTML values, and take screenshots.
+  - !PageLocateElements
+    - "body div"
+    - "all"
+    - 0
+  - !PageLocateElements
+    - "body h1 strong"
+    - "index"
+    - 0
+  - !ElementsLoopThrough
+    - !ElementSaveHtmlValue true
+    - !ElementTakeScreenshot "separate"
+    - !ElementPop
+    - !PageWait 100
+  - !PrintCurrentValues
+
+  # Example 3: Scroll to the bottom of the page.
+  - !PageScroll
+    - "full"
+    - 1.0
+  - !PageWait 2000
+
+  # Example 4: Take a screenshot of the current page.
+  - !PageTakeScreenshot "page_stackoverflow_home"
+
+  # Example 5: Scroll-up by one page.
+  - !PageScroll
+    - "page"
+    - -1.0
+
+  # Example 6: Navigate through an unknown number of pages/elements (e.g., pagination).
   - !PageOpen "https://au.iherb.com/recommended-for-you?type=1&cid=1855"
   - !PageWait 3000
   - !PageScroll
     - "page"
-    - 2.0
+    - 1.4
   - !PageWait 5000
   - !PageLoop
     - !PageLocateElements
@@ -14,11 +48,14 @@ steps:
     - !ElementsLoopThrough
       - !ElementClick
       - !ElementPop
+    - !PageWait 2000
     - !PageScroll
       - "page"
-      - 1.5
-    - !PageWait 2000
+      - 1.2
+    - !PageWait 3000
   - !PageWait 5000
+
+  # Example 7: Find a particular element and click it.
   - !PageOpen "https://www.wikipedia.org/"
   - !PageWait 2000
   - !PageLocateElements
@@ -30,7 +67,11 @@ steps:
     - !ElementClick
     - !ElementPop
   - !PageWait 2000
+
+  # Example 8: Go back to the previous page.
   - !PageBack
+
+  # Example 9: Provide input to an element, such as a search box.
   - !PageLocateElements
     - "html input#searchInput"
     - "index"
@@ -46,26 +87,3 @@ steps:
     - !ElementClick
     - !ElementPop
   - !PageWait 2000
-  - !PageOpen "https://www.wikipedia.org/"
-  - !PageLocateElements
-    - "body div"
-    - "all"
-    - 0
-  - !PageLocateElements
-    - "body h1 strong"
-    - "index"
-    - 0
-  - !ElementsLoopThrough
-    - !ElementSaveHtmlValue true
-    - !ElementTakeScreenshot "separate"
-    - !ElementPop
-    - !PageWait 100
-  - !PrintCurrentValues
-  - !PageScroll
-    - "full"
-    - 1.0
-  - !PageWait 5000
-  - !PageTakeScreenshot "page_stackoverflow_home"
-  - !PageScroll
-    - "all"
-    - -1.0

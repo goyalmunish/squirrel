@@ -1,16 +1,43 @@
-# Squirrel 🐿️
+# Squirrel
+
+```ascii
+░░░░░░░░░██▄▒█▀▄░▄▀▄░█░░▒█░▄▀▀▒██▀▒█▀▄░░▒▄▀▄░█▒█░▀█▀░▄▀▄░█▄▒▄█▒▄▀▄░▀█▀░█░▄▀▄░█▄░█░░░░░░░░
+▒░▒░▒░▒░▒█▄█░█▀▄░▀▄▀░▀▄▀▄▀▒▄██░█▄▄░█▀▄▒░░█▀█░▀▄█░▒█▒░▀▄▀░█▒▀▒█░█▀█░▒█▒░█░▀▄▀░█▒▀█▒░▒░▒░▒░
+
+               .^!777!^.                                                        
+             ^5#@@@@@@@&GJ^                               !5^.                  
+            ?@@&#&&@@@@@@@@G!                           .J@@&PGJ:               
+           .7^:...:~75B@@@@@@G!                  ..:^~?P&@@@@B@@@J              
+                       ~5&@@@@@G~         :~?YPGB#&&@@@@@@@@&GPY7.              
+                         :?G@@@@@G7.   ^YB&@@@@@@@@@@@@@@@@@G.                  
+                            ^?PB&@@BY~Y@@@@@@@@@@@@@@@@@@@@@@&GY?7~:            
+                                .::..P@@@@@@&B5J7~~^^^^^^~!77??7!^.             
+                                    5@@@@@#7:                                   
+                                   Y@@@@B?.                                     
+                                 :G@&GJ~                                        
+                                .#G!.                                           
+                                :5                                              
+                                 .
+
+░░░░░░░░░░░░░░░░░░░░░█░░▒█░█░▀█▀░█▄█░░░░░▄▀▀░▄▀▄░█▒█░█▒█▀▄▒█▀▄▒██▀░█▒░░░░░░░░░░░░░░░░░░░░░
+▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░░▀▄▀▄▀░█░▒█▒▒█▒█▒░▒░▒▄██░▀▄█░▀▄█░█░█▀▄░█▀▄░█▄▄▒█▄▄▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+```
 
 Squirrel revolutionizes browser automation by simplifying the process through YAML based workflow (such as [this sample workflow](./src/sample_workflow.yaml)) definition. With Squirrel, you effortlessly automate tasks without getting bogged down by technical intricacies, as the tool handles all the underlying complexities for you.
 
-Note: Squirrel is a working product, but it is yet to be polished. Stay tuned for updates and improvements!
+Here is a glimpse of the [above workflow in action](./assets/screen_recording_squirrel_sample_workflow_20240101.mp4):
+
+[![Sample Workflow in Action](./assets/screen_recording_squirrel_sample_workflow_20240101_thumbnail.png)](./assets/screen_recording_squirrel_sample_workflow_20240101.mp4)
 
 ## Quick Start
 
 ### Step 1: Setup Chrome for Testing
 
+Follow these steps to set up Chrome for testing:
+
 Refer [Chrome for Testing: reliable downloads for browser automation](https://developer.chrome.com/blog/chrome-for-testing/) and [Chrome for Testing availability](https://googlechromelabs.github.io/chrome-for-testing/). But, here is the gist:
 
-Get stable Chrome and Chrome Driver:
+Download the latest stable Chrome for Testing binary and ChromeDriver:
 
 ```shell
 # Download the latest available Chrome for Testing binary corresponding to the Stable channel.
@@ -20,7 +47,7 @@ npx @puppeteer/browsers install chrome@stable
 npx @puppeteer/browsers install chromedriver@stable
 ```
 
-Setup them as executable:
+Make them executable:
 
 ```shell
 # Setup executables
@@ -44,7 +71,7 @@ Once the webdriver is running, you may test by connecting to http://0.0.0.0:9515
 
 ### Step 2: Run Squirrel
 
-**Option 1:** Using Squirrel executable from published Docker image (preferred)
+**Option 1:** Using Squirrel executable from the Docker image (preferred)
 
 Refer [Install Docker Engine](https://docs.docker.com/engine/install/) for Docker installation.
 
@@ -58,7 +85,7 @@ docker run --rm --name squirrel goyalmunish/squirrel
 docker run --rm --name squirrel goyalmunish/squirrel ./src/sample_workflow.yaml http://host.docker.internal:9515 false
 ```
 
-**Option 2:** Using the Squirrel executable build locally
+**Option 2:** Using the locally build Squirrel executable
 
 ```shell
 # Clone the repo
@@ -69,7 +96,7 @@ cd squirrel
 cargo run --release ./src/sample_workflow.yaml
 ```
 
-**Option 3:** Using both, Squirrel executable and Web Driver, from published Docker images (experimental)
+**Option 3:** Using both Squirrel executable and Web Driver from Docker images (experimental)
 
 Refer:
 
@@ -86,7 +113,7 @@ docker run --rm --name squirrel goyalmunish/squirrel ./src/sample_workflow.yaml 
 
 ## Development Guide
 
-## Build and Push the Docker Image
+### Build and Push the Docker Image
 
 _Make use of [`build_image.sh`](./scripts/build_image.sh) to build and push (requires admin rights) [Docker image](https://hub.docker.com/r/goyalmunish/squirrel/tags):_
 
@@ -94,9 +121,9 @@ _Make use of [`build_image.sh`](./scripts/build_image.sh) to build and push (req
 # cd into repo
 cd squirrel/
 
-# example, setting version
+# set version, for example
 VERSION=v1.0.0
 
-# building images and pushing them
+# build images and pushing them
 . ./scripts/build_image.sh ${VERSION}
 ```
