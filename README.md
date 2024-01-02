@@ -1,26 +1,38 @@
 # Squirrel
 
+![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
+![YAML](https://img.shields.io/badge/yaml-%23ffffff.svg?style=for-the-badge&logo=yaml&logoColor=151515)
+![Selenium](https://img.shields.io/badge/-selenium-%43B02A?style=for-the-badge&logo=selenium&logoColor=white)
+
+![release](https://img.shields.io/github/v/release/goyalmunish/squirrel)
+[![Crates.io](https://img.shields.io/crates/v/shield-maker.svg)](https://crates.io/crates/shield-maker)
+![build](https://img.shields.io/github/actions/workflow/status/goyalmunish/squirrel/ci.yaml?label=build)
+![license](https://img.shields.io/github/license/goyalmunish/squirrel)
+
+
+
+
 ```ascii
-░░░░░░░░░██▄▒█▀▄░▄▀▄░█░░▒█░▄▀▀▒██▀▒█▀▄░░▒▄▀▄░█▒█░▀█▀░▄▀▄░█▄▒▄█▒▄▀▄░▀█▀░█░▄▀▄░█▄░█░░░░░░░░
-▒░▒░▒░▒░▒█▄█░█▀▄░▀▄▀░▀▄▀▄▀▒▄██░█▄▄░█▀▄▒░░█▀█░▀▄█░▒█▒░▀▄▀░█▒▀▒█░█▀█░▒█▒░█░▀▄▀░█▒▀█▒░▒░▒░▒░
-
-               .^!777!^.                                                        
-             ^5#@@@@@@@&GJ^                               !5^.                  
-            ?@@&#&&@@@@@@@@G!                           .J@@&PGJ:               
-           .7^:...:~75B@@@@@@G!                  ..:^~?P&@@@@B@@@J              
-                       ~5&@@@@@G~         :~?YPGB#&&@@@@@@@@&GPY7.              
-                         :?G@@@@@G7.   ^YB&@@@@@@@@@@@@@@@@@G.                  
-                            ^?PB&@@BY~Y@@@@@@@@@@@@@@@@@@@@@@&GY?7~:            
-                                .::..P@@@@@@&B5J7~~^^^^^^~!77??7!^.             
-                                    5@@@@@#7:                                   
-                                   Y@@@@B?.                                     
-                                 :G@&GJ~                                        
-                                .#G!.                                           
-                                :5                                              
-                                 .
-
-░░░░░░░░░░░░░░░░░░░░░█░░▒█░█░▀█▀░█▄█░░░░░▄▀▀░▄▀▄░█▒█░█▒█▀▄▒█▀▄▒██▀░█▒░░░░░░░░░░░░░░░░░░░░░
-▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░░▀▄▀▄▀░█░▒█▒▒█▒█▒░▒░▒▄██░▀▄█░▀▄█░█░█▀▄░█▀▄░█▄▄▒█▄▄▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
+    ░░░░░░░░░██▄▒█▀▄░▄▀▄░█░░▒█░▄▀▀▒██▀▒█▀▄░░▒▄▀▄░█▒█░▀█▀░▄▀▄░█▄▒▄█▒▄▀▄░▀█▀░█░▄▀▄░█▄░█░░░░░░░░
+    ▒░▒░▒░▒░▒█▄█░█▀▄░▀▄▀░▀▄▀▄▀▒▄██░█▄▄░█▀▄▒░░█▀█░▀▄█░▒█▒░▀▄▀░█▒▀▒█░█▀█░▒█▒░█░▀▄▀░█▒▀█▒░▒░▒░▒░
+    
+                   .^!777!^.                                                        
+                 ^5#@@@@@@@&GJ^                               !5^.                  
+                ?@@&#&&@@@@@@@@G!                           .J@@&PGJ:               
+               .7^:...:~75B@@@@@@G!                  ..:^~?P&@@@@B@@@J              
+                           ~5&@@@@@G~         :~?YPGB#&&@@@@@@@@&GPY7.              
+                             :?G@@@@@G7.   ^YB&@@@@@@@@@@@@@@@@@G.                  
+                                ^?PB&@@BY~Y@@@@@@@@@@@@@@@@@@@@@@&GY?7~:            
+                                    .::..P@@@@@@&B5J7~~^^^^^^~!77??7!^.             
+                                        5@@@@@#7:                                   
+                                       Y@@@@B?.                                     
+                                     :G@&GJ~                                        
+                                    .#G!.                                           
+                                    :5                                              
+                                     .
+    
+    ░░░░░░░░░░░░░░░░░░░░░█░░▒█░█░▀█▀░█▄█░░░░░▄▀▀░▄▀▄░█▒█░█▒█▀▄▒█▀▄▒██▀░█▒░░░░░░░░░░░░░░░░░░░░░
+    ▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░░▀▄▀▄▀░█░▒█▒▒█▒█▒░▒░▒▄██░▀▄█░▀▄█░█░█▀▄░█▀▄░█▄▄▒█▄▄▒░▒░▒░▒░▒░▒░▒░▒░▒░▒░
 ```
 
 Squirrel revolutionizes browser automation by simplifying the process through YAML based workflow (such as [this sample workflow](./src/sample_workflow.yaml)) definition. With Squirrel, you effortlessly automate tasks without getting bogged down by technical intricacies, as the tool handles all the underlying complexities for you.

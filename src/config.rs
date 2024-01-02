@@ -1,4 +1,4 @@
-/// Config struct providing all passed and environmental
+/// `Config` struct providing all passed and environmental
 /// configurations required for the program run.
 #[derive(Debug)]
 pub struct Config {
@@ -11,7 +11,7 @@ pub struct Config {
 pub const WEBDRIVER_URL_DEFAULT: &str = "http://localhost:9515";
 pub const HEADLESS_BROWSER_DEFAULT: bool = true;
 pub const TEMP_DIR_DEFAULT: &str = "temp/";
-/// TAB_SIZE defines the printing indentation.
+/// `TAB_SIZE` defines the printing indentation.
 pub const TAB_SIZE: usize = 4;
 /// Parse args to construct and return a Config.
 pub fn parse_args(args: &Vec<String>) -> Config {

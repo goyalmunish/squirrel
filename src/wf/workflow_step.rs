@@ -1,23 +1,24 @@
 use crate::{config, utils};
 
-/// `WorkflowStep` defines individual step of `Workflow`.
+/// `WorkflowStep` enum defines individual step of `Workflow`.
+/// Check its variants for currently supported actions.
 #[derive(serde::Serialize, serde::Deserialize, Debug, strum_macros::Display)]
 pub enum WorkflowStep {
     /// Open given url
     ///
-    /// Argument: url (String)
+    /// Arguments: `url` (`String`)
     PageOpen(String),
     /// Go back
     PageBack,
     /// Find elements on current page.
     ///
-    /// User given css as selector.
+    /// Use given css as selector.
     /// If running in "all" mode, search all elements, ignoring the index.
     /// If running in "index" mode, then only select the element at given index
     /// among all found entries.
     /// If no matching element is found, return an error.
     ///
-    /// Arguments: css (String), mode (all/index) (String), index (usize)
+    /// Arguments: `css` (`String`), `mode` ("all"/"index") (`String`), `index` (`usize`)
     PageLocateElements(String, String, usize),
     /// Scroll current page.
     ///
@@ -25,15 +26,15 @@ pub enum WorkflowStep {
     /// the bottom, or page_size as -1.0 to scroll to the top of the page.
     /// If running in "page" mode, provide page_size.
     ///
-    /// Arguments: mode (String), page_size (f64)
+    /// Arguments: `mode` (`String`), `page_size` (`f64`)
     PageScroll(String, f64),
     /// Take screenshot of current page.
     ///
-    /// Argument: file_prefix (String)
+    /// Arguments: `file_prefix` (`String`)
     PageTakeScreenshot(String),
     /// Wait for given milliseconds.
     ///
-    /// Arguments: ms (milliseconds)
+    /// Arguments: `duration_ms` (milliseconds) (`String`)
     PageWait(u64),
     /// Run an infinite loop, with given sub-steps.
     /// If any of its sub-steps returns error, break the loop.
@@ -41,11 +42,15 @@ pub enum WorkflowStep {
     /// For example, this is helpful in the conditions where you want to
     /// keep clicking on "Next" button in pagination, until all pages are
     /// exhausted and so the "Next" button couldn't be found.
+    ///
+    /// Arguments: `sub_steps` (`Vec<WorkflowStep>`)
     PageLoop(Vec<WorkflowStep>),
     /// Loop through all current-page-elements, with given sub-steps.
     ///
     /// It is associated with `PageLocateElements`, which populates the
     /// current-page-elements Vector based on its outcome.
+    ///
+    /// Arguments: `sub_steps` (`Vec<WorkflowStep>`)
     ElementsLoopThrough(Vec<WorkflowStep>),
     /// Click the currently selected page element.
     ///
@@ -56,20 +61,22 @@ pub enum WorkflowStep {
     ///
     /// It is associated with `ElementsLoopThrough` for the currently
     /// selected page element (the top element of current-page-elements Vector).
+    ///
+    /// Arguments: `keys` (`String`)
     ElementSendKeys(String),
     /// Save HTML value of the currently selected element.
     ///
     /// It is associated with `ElementsLoopThrough` for the currently
     /// selected page element (the top element of current-page-elements Vector).
     ///
-    /// Arguments: is_inner (bool)
+    /// Arguments: `is_inner` (`bool`)
     ElementSaveHtmlValue(bool),
     /// Take screenshot of the current element.
     ///
     /// It is associated with `ElementsLoopThrough` for the currently
     /// selected page element (the top element of current-page-elements Vector).
     ///
-    /// Arguments: file_prefix (String)
+    /// Arguments: `file_prefix` (`String`)
     ElementTakeScreenshot(String),
     /// Remove current element from the currently selected page elements.
     ///
@@ -374,7 +381,7 @@ impl WorkflowStep {
             WorkflowStep::PageTakeScreenshot(file_prefix) => {
                 format!("{self} with file_prefix={file_prefix}")
             }
-            WorkflowStep::PageWait(ms) => format!("{self} for {ms}ms"),
+            WorkflowStep::PageWait(duration_ms) => format!("{self} for {duration_ms}ms"),
             WorkflowStep::PageLoop(sub_steps) => {
                 format!("{self} with sub_steps: {:?}", sub_steps)
             }
@@ -382,7 +389,7 @@ impl WorkflowStep {
                 format!("{self} with sub_steps: {:?}", sub_steps)
             }
             WorkflowStep::ElementSendKeys(keys) => format!("{self} with keys={keys}"),
-            WorkflowStep::ElementSaveHtmlValue(value) => format!("{self} with inner={value}"),
+            WorkflowStep::ElementSaveHtmlValue(is_inner) => format!("{self} with inner={is_inner}"),
             WorkflowStep::ElementTakeScreenshot(file_prefix) => {
                 format!("{self} with file_prefix={file_prefix}")
             }

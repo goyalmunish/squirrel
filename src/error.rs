@@ -1,7 +1,7 @@
 use std::error;
 use std::fmt;
 
-// Define a custom error type
+/// A custom error type
 #[derive(Debug)]
 pub struct CustomError {
     pub message: String,
