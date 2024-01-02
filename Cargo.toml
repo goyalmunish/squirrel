@@ -1,10 +1,10 @@
 [package]
-name = "squirrel-browser-automation"
+name = "squirrel-browser-automation" # https://crates.io/crates/squirrel-browser-automation
 version = "1.2.0"
 edition = "2021"
 authors = ["Munish Goyal"]
 description = "Browser automation via YAML based workflow definition."
-documentation = "https://crates.io/crates/squirrel-browser-automation"
+documentation = "https://docs.rs/crate/squirrel-browser-automation/latest"
 readme = "README.md"
 homepage = "https://github.com/goyalmunish/squirrel"
 license-file = "LICENCE"

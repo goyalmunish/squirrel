@@ -9,9 +9,6 @@
 ![build](https://img.shields.io/github/actions/workflow/status/goyalmunish/squirrel/ci.yaml?label=build)
 ![license](https://img.shields.io/github/license/goyalmunish/squirrel)
 
-
-
-
 ```ascii
     ░░░░░░░░░██▄▒█▀▄░▄▀▄░█░░▒█░▄▀▀▒██▀▒█▀▄░░▒▄▀▄░█▒█░▀█▀░▄▀▄░█▄▒▄█▒▄▀▄░▀█▀░█░▄▀▄░█▄░█░░░░░░░░
     ▒░▒░▒░▒░▒█▄█░█▀▄░▀▄▀░▀▄▀▄▀▒▄██░█▄▄░█▀▄▒░░█▀█░▀▄█░▒█▒░▀▄▀░█▒▀▒█░█▀█░▒█▒░█░▀▄▀░█▒▀█▒░▒░▒░▒░
@@ -37,7 +34,11 @@
 
 Squirrel revolutionizes browser automation by simplifying the process through YAML based workflow (such as [this sample workflow](./src/sample_workflow.yaml)) definition. With Squirrel, you effortlessly automate tasks without getting bogged down by technical intricacies, as the tool handles all the underlying complexities for you.
 
-Here is a glimpse of the [above workflow in action](./assets/screen_recording_squirrel_sample_workflow_20240101.mp4):
+- [Github Repo](https://github.com/goyalmunish/squirrel)
+- [Cargo Package: `squirrel-browser-automation`](https://crates.io/crates/squirrel-browser-automation)
+- [Documentation](https://docs.rs/crate/squirrel-browser-automation/latest)
+
+Here is a glimpse of the [above workflow in action](./assets/screen_recording_squirrel_sample_workflow_20240101.mp4)
 
 [![Sample Workflow in Action](./assets/screen_recording_squirrel_sample_workflow_20240101_thumbnail.png)](./assets/screen_recording_squirrel_sample_workflow_20240101.mp4)
 
