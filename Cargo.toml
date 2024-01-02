@@ -1,15 +1,14 @@
 [package]
 name = "squirrel-browser-automation"
-version = "0.1.0"
+version = "1.2.0"
 edition = "2021"
 authors = ["Munish Goyal"]
 description = "Browser automation via YAML based workflow definition."
-documentation = ""
+documentation = "https://crates.io/crates/squirrel-browser-automation"
 readme = "README.md"
 homepage = "https://github.com/goyalmunish/squirrel"
-license = "MIT"
 license-file = "LICENCE"
-keywords = ["browser automation", "selenium", "browser", "automation"]
+keywords = ["browser", "automation", "selenium"]
 categories = ["development-tools", "development-tools::testing", "web-programming"]
 exclude = ["assets", ".github", ".gitignore", "temp", "target"]
 
