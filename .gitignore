@@ -2,7 +2,6 @@
 /target/
 
 # Rust artifacts
-Cargo.lock
 Cargo.toml.orig
 *.rlib
 *.rmeta
@@ -23,3 +22,5 @@ Cargo.toml.orig
 /target/release/deps/
 /target/release/build/
 
+# Custom workflow file
+workflow*.yaml

@@ -31,9 +31,8 @@ pub async fn invoke_workflow(config: &config::Config) -> Result<(), fantoccini::
             )));
         }
     };
-
     // The `current_elements` would hold elements found in the search
-    let mut current_elements: Vec<fantoccini::elements::Element> = Vec::new();
+    let mut current_elements_stack: Vec<Vec<fantoccini::elements::Element>> = Vec::new();
     // The `current_value` would hold the values the users is interested
     // to be provided with
     let mut current_values: Vec<String> = Vec::new();
@@ -52,9 +51,10 @@ pub async fn invoke_workflow(config: &config::Config) -> Result<(), fantoccini::
             .execute(
                 config,
                 &conn_webdriver,
-                &mut current_elements,
+                &mut current_elements_stack,
                 &mut current_values,
                 depth,
+                &wf.name,
             )
             .await
         {
@@ -118,7 +118,9 @@ mod tests {
                 - "index"
                 - 0
               - !ElementsLoopThrough
-                - !ElementSaveHtmlValue true
+                - !ElementSaveHtmlValue
+                  - "heading"
+                  - true
                 - !ElementTakeScreenshot "separate"
                 - !ElementPop
                 - !PageWait 100
@@ -126,8 +128,11 @@ mod tests {
               - !PageScroll
                 - "full"
                 - 1.0
+              - !PageScroll
+                - "page"
+                - -0.5
               - !PageWait 5000
-              - !PageTakeScreenshot "page_stackoverflow_home"
+              - !PageTakeScreenshot "home"
     "#;
 
     #[test]
@@ -142,6 +147,7 @@ mod tests {
         let config = config::Config {
             workflow_file_path: workflow_path.to_string_lossy().to_string(),
             headless_browser: true,
+            browser_args: vec!["".to_string()],
             webdriver_url: config::WEBDRIVER_URL_DEFAULT.to_string(),
             temp_dir: String::from(config::TEMP_DIR_DEFAULT),
         };
@@ -162,6 +168,7 @@ mod tests {
         let config = config::Config {
             workflow_file_path: String::from("/nonexistent/file.yaml"),
             headless_browser: true,
+            browser_args: vec!["".to_string()],
             webdriver_url: config::WEBDRIVER_URL_DEFAULT.to_string(),
             temp_dir: String::from(config::TEMP_DIR_DEFAULT),
         };

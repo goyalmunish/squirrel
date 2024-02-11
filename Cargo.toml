@@ -1,6 +1,6 @@
 [package]
 name = "squirrel-browser-automation" # https://crates.io/crates/squirrel-browser-automation
-version = "1.2.0"
+version = "1.3.0"
 edition = "2021"
 authors = ["Munish Goyal"]
 description = "Browser automation via YAML based workflow definition."
@@ -17,12 +17,12 @@ exclude = ["assets", ".github", ".gitignore", "temp", "target"]
 [dependencies]
 fantoccini = "0.19.3"
 tokio = { version = "1", features = ["full"] }
-serde_json = "1.0.108"
-serde_yaml = "0.9.29"
+serde_json = "1.0.113"
+serde_yaml = "0.9.31"
 serde = { version = "1.0", features = ["derive"] }
-strum = "0.25"
-strum_macros = "0.25"
-chrono = "0.4.31"
+strum = "0.26.1"
+strum_macros = "0.26.1"
+chrono = "0.4.33"
 async-recursion = "1.0.5"
 tempfile = "3.9.0"
-openssl = { version = "0.10", features = ["vendored"] }
+openssl = { version = "0.10.63", features = ["vendored"] }

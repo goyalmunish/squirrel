@@ -8,54 +8,14 @@ steps:
     - "body div"
     - "all"
     - 0
-  - !PageLocateElements
-    - "body h1 strong"
-    - "index"
-    - 0
   - !ElementsLoopThrough
     - !ElementSaveHtmlValue true
-    - !ElementTakeScreenshot "separate"
+    - !ElementTakeScreenshot "wiki_elems_"
     - !ElementPop
     - !PageWait 100
   - !PrintCurrentValues
 
-  # Example 3: Scroll to the bottom of the page.
-  - !PageScroll
-    - "full"
-    - 1.0
-  - !PageWait 2000
-
-  # Example 4: Take a screenshot of the current page.
-  - !PageTakeScreenshot "page_stackoverflow_home"
-
-  # Example 5: Scroll-up by one page.
-  - !PageScroll
-    - "page"
-    - -1.0
-
-  # Example 6: Navigate through an unknown number of pages/elements (e.g., pagination).
-  - !PageOpen "https://au.iherb.com/recommended-for-you?type=1&cid=1855"
-  - !PageWait 3000
-  - !PageScroll
-    - "page"
-    - 1.4
-  - !PageWait 5000
-  - !PageLoop
-    - !PageLocateElements
-      - "html a.pagination-next"
-      - "index"
-      - 0
-    - !ElementsLoopThrough
-      - !ElementClick
-      - !ElementPop
-    - !PageWait 2000
-    - !PageScroll
-      - "page"
-      - 1.2
-    - !PageWait 3000
-  - !PageWait 5000
-
-  # Example 7: Find a particular element and click it.
+  # Example 3: Find a particular element, click it, scroll page, and take screenshots.
   - !PageOpen "https://www.wikipedia.org/"
   - !PageWait 2000
   - !PageLocateElements
@@ -65,13 +25,26 @@ steps:
   - !PageWait 1000
   - !ElementsLoopThrough
     - !ElementClick
+      - false
+      - false
+    - !PageTakeScreenshot "wiki_lang_"
     - !ElementPop
   - !PageWait 2000
+  - !PageScroll
+    - "full"
+    - 1.0
+  - !PageTakeScreenshot "wiki_bottom_"
+  - !PageScroll
+    - "page"
+    - -1.0
+  - !PageTakeScreenshot "wiki_lang_bottom_but_one_"
 
-  # Example 8: Go back to the previous page.
+  # Example 4: Go back to the previous page.
   - !PageBack
+  - !PageTakeScreenshot "wiki_back_"
 
-  # Example 9: Provide input to an element, such as a search box.
+  # Example 5: Provide input to an element, such as a search box.
+  - !PageOpen "https://www.wikipedia.org/"
   - !PageLocateElements
     - "html input#searchInput"
     - "index"
@@ -79,11 +52,35 @@ steps:
   - !ElementsLoopThrough
     - !ElementSendKeys "first search"
     - !ElementPop
+  - !PageTakeScreenshot "wiki_input_elem_"
   - !PageLocateElements
     - "html button.pure-button"
     - "index"
     - 0
   - !ElementsLoopThrough
     - !ElementClick
+      - false
+      - false
     - !ElementPop
   - !PageWait 2000
+  - !PageTakeScreenshot "wiki_form_submit_"
+
+  # Example 6: Navigate through an unknown number of pages/elements (e.g., pagination).
+  - !PageOpen "https://au.iherb.com/recommended-for-you?type=1&cid=1855"
+  - !PageWait 3000
+  - !PageLoop
+    - !PageScroll
+      - "page"
+      - 0.8
+    - !PageWait 3000
+    - !PageLocateElements
+      - "html a.pagination-next"
+      - "index"
+      - 0
+    - !PageTakeScreenshot "iherb_pagination_"
+    - !ElementsLoopThrough
+      - !ElementClick
+        - false
+        - false
+      - !PageWait 2000
+      - !ElementPop

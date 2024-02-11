@@ -15,17 +15,23 @@ mod wf;
 /// // with default values for all, but first argument
 /// cargo run ./src/sample_workflow.yaml
 ///
+/// // with default values (but provided explicitly) for webdriver_url,
+/// // headless_browser, and browser_args
+/// cargo run ./src/sample_workflow.yaml http://localhost:9515 true ""
+///
 /// // with default values (but provided explicitly) for webdriver_url
-/// // and headless_browser
-/// cargo run ./src/sample_workflow.yaml http://localhost:9515 true
+/// // and headless_browser, but with explicit browser arg
+/// cp ./src/sample_workflow.yaml workflow.yaml
+/// cargo run workflow.yaml http://localhost:9515 true "--no-sandbox --disable-dev-shm-usage --disable-popup-blocking --disable-gpu"
 ///
 /// // directly using build executable
 /// ./target/debug/squirrel ./src/sample_workflow.yaml http://localhost:9515 false
 ///
 /// // as IDE run configuration
-/// RustRover: `run --package squirrel --bin squirrel -- ./src/sample_workflow.yaml http://localhost:9515 false
+/// RustRover: `run --package squirrel-browser-automation --bin squirrel-browser-automation -- workflow.yaml http://localhost:9515 false ""`
 /// ```
 fn main() {
+    println!("RUN STARTED (timestamp={})", utils::timestamp());
     let args: Vec<String> = std::env::args().collect();
     let cnf: config::Config = config::parse_args(&args);
     println!("Squirrel executing with configuration: {:#?}", cnf);
@@ -36,4 +42,5 @@ fn main() {
             error = error
         ),
     }
+    println!("RUN FINISHED (timestamp={})", utils::timestamp());
 }
